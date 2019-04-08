@@ -31,7 +31,8 @@ class CreateCardInfoTable extends Migration {
 			$table->string('npc_host_ip', 48)->default('');
 			$table->string('npc_api_path', 48)->default('');
 			$table->string('mid', 10)->default('');
-			$table->binary('npwd')->default('');
+			$table->binary('npwd');
+				// ->default('');
 		});
 	}
 

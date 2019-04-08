@@ -19,7 +19,7 @@ class CreateEscapeAbroadTable extends Migration {
 			$table->integer('date_create')->default(0)->comment('建立日期');
 			$table->integer('date_checkin')->default(0)->comment('入住日期');
 			$table->integer('date_checkout')->default(0)->comment('離店日期');
-			$table->string('store_order_no', 200)->default('')->index('store_order_no')->comment('詢問單編號');
+			$table->string('store_order_no', 191)->default('')->index('store_order_no')->comment('詢問單編號');
 			$table->boolean('source')->default(0)->index('source')->comment('訂單來源');
 			$table->integer('date_writeoff')->default(0)->comment('收款日');
 			$table->string('memo');

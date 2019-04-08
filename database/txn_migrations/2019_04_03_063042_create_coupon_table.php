@@ -38,7 +38,7 @@ class CreateCouponTable extends Migration {
 			$table->boolean('refund_way')->default(0);
 			$table->integer('type')->default(0)->comment('bitwise, 核銷類型，請參閱 flag_mapping');
 			$table->index(['auth_serial','auth_code'], 'idx_coupon_no');
-			$table->primary(['coupon_id','product_id']);
+			// $table->primary(['coupon_id','product_id']);
 		});
 	}
 

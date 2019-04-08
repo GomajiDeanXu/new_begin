@@ -24,8 +24,12 @@ class CreateTrustDealsCtTable extends Migration {
 			$table->integer('bonus')->default(0);
 			$table->integer('pcode')->default(0);
 			$table->integer('discount')->default(0);
-			$table->date('order_date')->default('0000-00-00')->index('idx_order_date');
-			$table->time('order_time')->default('00:00:00');
+			$table->date('order_date')->nullable();
+			$table->date('order_date')
+			->default('0000-00-00')->index('idx_order_date')->change();
+			$table->time('order_time')->nullable();
+			$table->time('order_time')
+			->default('00:00:00')->change();
 			$table->string('pay_style', 4)->default('')->index('idx_pay_style')->comment('a:現金 / c:刷卡');
 			$table->string('used_style', 3)->default('')->index('idx_used_style')->comment('1:未使用 / 2:已使用 / 3:已作廢');
 			$table->integer('date_create')->default(0)->index('idx_date_create');

@@ -23,7 +23,9 @@ class CreateTsmCommissionTable extends Migration {
 			$table->string('branch_name', 60)->default('')->comment('分店名稱');
 			$table->string('product_name', 254)->nullable()->comment('商品名稱(方案標)');
 			$table->string('sp_product_name', 254)->nullable()->comment('子商品名稱(子方案標)');
-			$table->dateTime('create_dt')->default('0000-00-00 00:00:00')->index('idx_create_dt')->comment('建立日期');
+			$table->dateTime('create_dt')->nullable();
+			$table->dateTime('create_dt')
+			->default('0000-00-00 00:00:00')->index('idx_create_dt')->comment('建立日期')->change();
 			$table->integer('price')->default(0)->comment('活動價(含稅)');
 			$table->integer('cost_price')->default(0)->comment('進貨價(含稅)');
 			$table->integer('total_net')->default(0)->comment('超級市場拆分前淨額');

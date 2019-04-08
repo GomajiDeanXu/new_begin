@@ -52,7 +52,7 @@ payment.agent_type');
 			$table->boolean('travel')->default(0)->index('idx_travel')->comment('國旅卡標記 (flag_mapping)');
 			$table->integer('sp_id')->default(0)->index('idx_sp_id')->comment('子方案 (gomaji.sub_products.sp_id)');
 			$table->string('memo')->nullable();
-			$table->primary(['purchase_id','product_id']);
+			// $table->primary(['purchase_id','product_id']);
 		});
 	}
 

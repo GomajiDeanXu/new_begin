@@ -54,7 +54,7 @@ payment.agent_type');
 			$table->integer('sp_id')->default(0)->index('idx_sp_id');
 			$table->integer('du_id')->default(0);
 			$table->string('memo')->nullable();
-			$table->primary(['purchase_id','product_id']);
+			// $table->primary(['purchase_id','product_id']);
 		});
 	}
 

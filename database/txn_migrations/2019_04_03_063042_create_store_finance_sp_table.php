@@ -18,7 +18,7 @@ class CreateStoreFinanceSpTable extends Migration {
 			$table->integer('sf_id')->default(0)->index('sf_id')->comment('店家請款ID');
 			$table->integer('product_id')->default(0)->index('product_id')->comment('商品ID');
 			$table->integer('sp_id')->default(0)->index('sp_id')->comment('子方案ID');
-			$table->string('sp_name', 254)->index('sp_name')->comment('子方案名稱');
+			$table->string('sp_name', 191)->index('sp_name')->comment('子方案名稱');
 			$table->integer('sp_price')->default(0)->index('sp_price')->comment('子方案單價');
 			$table->integer('sale_number')->default(0)->comment('銷售份數');
 			$table->integer('verify_number')->default(0)->comment('核銷份數');

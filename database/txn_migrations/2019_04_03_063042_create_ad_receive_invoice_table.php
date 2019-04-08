@@ -14,8 +14,12 @@ class CreateAdReceiveInvoiceTable extends Migration {
 	{
 		Schema::connection('transaction')->create('ad_receive_invoice', function(Blueprint $table)
 		{
-			$table->integer('invoice_id', true)->comment('發票id');
-			$table->integer('finance_id')->index('idx_finance_id')->comment('結帳id
+			// $table->primary(['invoice_id','create_ts']);
+			$table->integer('invoice_id', true)->comment('發票id')
+				->index('idx_invoice_id');
+			$table->integer('finance_id')
+				->index('idx_finance_id')
+				->comment('結帳id
 ad_finance.finance_id');
 			$table->string('inv_no', 45)->default('')->comment('發票號碼');
 			$table->integer('inv_amount')->default(0)->comment('發票開立金額');
@@ -30,7 +34,6 @@ ad_finance.finance_id');
 			$table->boolean('flag')->default(0)->comment('0: 刪除 / 1: 正常');
 			$table->integer('create_ts')->default(0);
 			$table->string('memo', 45)->nullable();
-			$table->primary(['invoice_id','create_ts']);
 		});
 	}
 

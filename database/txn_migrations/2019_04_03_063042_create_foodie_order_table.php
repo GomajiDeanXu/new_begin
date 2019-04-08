@@ -37,7 +37,9 @@ class CreateFoodieOrderTable extends Migration {
 			$table->string('deliveryStatus', 50)->default('');
 			$table->string('deliveryFee', 11)->default('');
 			$table->string('branchPhone', 50)->default('');
-			$table->dateTime('last_updated_time')->default('0000-00-00 00:00:00');
+			$table->dateTime('last_updated_time')->nullable();
+			$table->dateTime('last_updated_time')
+			->default('0000-00-00 00:00:00')->change();
 		});
 	}
 

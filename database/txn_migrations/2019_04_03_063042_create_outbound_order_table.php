@@ -22,8 +22,12 @@ class CreateOutboundOrderTable extends Migration {
 			$table->string('room_name', 100)->comment('房型名稱');
 			$table->integer('plan_id')->default(0)->comment('購買當下房型資料外來鍵');
 			$table->string('plan_name', 100)->comment('方案名稱');
-			$table->dateTime('checkin_ts')->default('0000-00-00 00:00:00')->comment('入住時間(當地)');
-			$table->dateTime('checkout_ts')->default('0000-00-00 00:00:00')->comment('退房時間(當地)');
+			$table->dateTime('checkin_ts')->nullable();
+			$table->dateTime('checkin_ts')
+			->default('0000-00-00 00:00:00')->comment('入住時間(當地)')->change();
+			$table->dateTime('checkout_ts')->nullable();
+			$table->dateTime('checkout_ts')
+			->default('0000-00-00 00:00:00')->comment('退房時間(當地)')->change();
 			$table->boolean('time_zone')->default(0)->comment('當地時區，0=GMT＋0');
 			$table->boolean('num_otona')->default(0)->comment('入住大人人數');
 			$table->boolean('num_kodomo')->default(0)->comment('入住小孩人數');

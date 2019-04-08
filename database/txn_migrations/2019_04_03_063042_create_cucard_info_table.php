@@ -29,7 +29,8 @@ class CreateCucardInfoTable extends Migration {
 			$table->string('npc_id', 16)->default('');
 			$table->string('npc_pwd', 8)->default('');
 			$table->smallInteger('api_mode')->default(0)->comment('API模式 0：web url，1：API，2：3D');
-			$table->binary('npwd')->default('');
+			$table->binary('npwd');
+			// ->default('');
 		});
 	}
 

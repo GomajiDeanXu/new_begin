@@ -26,10 +26,18 @@ class CreateOutboundOrderDetailTable extends Migration {
 			$table->integer('charge_amount')->default(0)->comment('實際沒收的金額(原幣別)');
 			$table->integer('refund_amount_user')->default(0)->comment('退給消費者的金額(台幣)');
 			$table->boolean('no_show')->default(0)->comment('今日消費者是否未出現');
-			$table->dateTime('checkin_ts')->default('0000-00-00 00:00:00')->comment('單位為一天的入住時間(當地)');
-			$table->dateTime('real_verify_ts')->default('0000-00-00 00:00:00')->comment('coupon被系統核銷的時間');
-			$table->dateTime('create_ts')->default('0000-00-00 00:00:00')->comment('coupon建立時間，攸關退費');
-			$table->dateTime('refund_ts')->default('0000-00-00 00:00:00')->comment('完成退費時間');
+			$table->dateTime('checkin_ts')->nullable();
+			$table->dateTime('checkin_ts')
+			->default('0000-00-00 00:00:00')->comment('單位為一天的入住時間(當地)')->change();
+			$table->dateTime('real_verify_ts')->nullable();
+			$table->dateTime('real_verify_ts')
+			->default('0000-00-00 00:00:00')->comment('coupon被系統核銷的時間')->change();
+			$table->dateTime('create_ts')->nullable();
+			$table->dateTime('create_ts')
+			->default('0000-00-00 00:00:00')->comment('coupon建立時間，攸關退費')->change();
+			$table->dateTime('refund_ts')->nullable();
+			$table->dateTime('refund_ts')
+			->default('0000-00-00 00:00:00')->comment('完成退費時間')->change();
 			$table->boolean('refund_remark')->nullable()->default(0)->comment('Relux 退費API是否回覆備註，客服要重算沒收金, 0:無備註,1:有備註');
 		});
 	}

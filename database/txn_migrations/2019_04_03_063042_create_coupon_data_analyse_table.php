@@ -17,7 +17,9 @@ class CreateCouponDataAnalyseTable extends Migration {
 			$table->integer('cd_id', true);
 			$table->integer('product_id')->default(0)->index('idx_product_id')->comment('products.product_id');
 			$table->integer('coupon_id')->default(0)->index('idx_coupon_id')->comment('coupon.coupon_id');
-			$table->date('date_cycle')->default('0000-00-00')->index('idx_date_cycle')->comment('結帳日期');
+			$table->date('date_cycle')->nullable();
+			$table->date('date_cycle')
+			->default('0000-00-00')->index('idx_date_cycle')->comment('結帳日期')->change();
 			$table->float('sale_money', 12, 4)->default(0.0000)->comment('店家銷售拆分金額');
 			$table->float('gm_sale_money', 12, 4)->default(0.0000)->comment('GM銷售拆分金額');
 			$table->integer('date_create')->default(0);

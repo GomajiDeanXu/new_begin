@@ -26,7 +26,7 @@ class CreatePcodePpeTable extends Migration {
 			$table->bigInteger('purchase_id')->default(0)->index('idx_purchase_id');
 			$table->boolean('flag')->default(0)->index('idx_flag');
 			$table->string('refer', 32)->default('');
-			$table->primary(['gm_uid','date_get','pcode_id']);
+			// $table->primary(['gm_uid','date_get','pcode_id']);
 		});
 	}
 

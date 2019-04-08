@@ -23,7 +23,9 @@ class CreateRefFeedbackRecordTable extends Migration {
 			$table->string('click_id')->default('美安 click_id 對應 transaction.shop_dot_com.rid');
 			$table->string('gym_tripid', 20)->nullable()->default('0')->comment('購有錢交易的使用者ID 對應 transaction.shop_dot_com.gym_tripid');
 			$table->string('status')->nullable()->comment('回拋結果');
-			$table->dateTime('feedback_ts')->default('0000-00-00 00:00:00')->index('idx_feedback_ts')->comment('回拋時間');
+			$table->dateTime('feedback_ts')->nullable();
+			$table->dateTime('feedback_ts')
+			->default('0000-00-00 00:00:00')->index('idx_feedback_ts')->comment('回拋時間')->change();
 			$table->string('transaction_id')->default('')->comment('shopback 訂單追蹤碼');
 			$table->smallInteger('sb_order_status')->nullable()->comment('shopback回拋狀態(gomaji自訂) 0:待回拋, 1:回拋成功, 2:回拋失敗, 3:訂單比對異常, 4:回拋失敗(500 error), 5:已重打三次，依然失敗');
 			$table->string('sb_order_response')->default('')->comment('shopback回拋結果');
