@@ -1,71 +1,50 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# about this project
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## 系統需求
+* php 7.3
+* composer
 
-## About Laravel
+## Purpose
+鑑於過去舊專案沒有統一的本地端資料庫測試環境，所以將 2019/4/3 之前的資料庫資料做成 migration ，統一管理於本專案。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+migrations 資料夾分成兩個
+database/migrations 為線上資料庫 gomaji
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+database/txn_migrations 為線上資料庫 transaction
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 速查表單
 
-## Learning Laravel
+|線上資料庫名稱|migration資料夾|連線資訊名稱( config.php 中的設定名稱)|
+|---|---|---|
+|gomaji|database/migrations|gomaji|
+|transaction|database/txn_migrations|transaction|
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* ps. 欄位註解裡面有亂碼的地方是原本線上資料庫就這樣了，我只是搬運工，不是我的鍋。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost you and your team's skills by digging into our comprehensive video library.
+### 執行指令
 
-## Laravel Sponsors
+* gomaji 資料庫 migrate
+```
+php artisan migrate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* transaction 資料庫 migrate
+```
+php artisan migrate --database='transaction' --path=./database/txn_migrations
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
+### Warning
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. 此份 migration 僅供測試使用，不建議部署至正式。
+2. 部分時間欄位，nullable ＆ default 為 '0000-00-00' 諸如此類，不推薦這樣使用。
+3. 每張表的 id 都各自不同名字，建議未來各表 id 取名 id 即可。
+4. 資料庫 transaction 的 ad_receive_invoice 複合 PK 不建立，原因
+   1. migrate 時一直噴錯，說重複建立 PK，innodb 不能同時 auto increament 又用複合 key
+   2. 這樣的 PK 並沒有效果，反而增加 DB Blocking 機率
+   3. index 有 invoice_id 就夠了
+5. 資料庫 transaction 的 card_ino & cucard_info 預設值會噴錯，所以取消空字串預設值。
+6. 資料庫 transaction 的 coupon & pcode_ppe 表 也有上面（4）的問題。
+7. 資料庫 transaction 的 user_purchases_err & user_purchases 也有上面（4）的問題。
+8. 資料庫 transaction 表 escape_abroad 欄位 store_order_no 長度 200->191
+9. 資料庫 transaction 表 foodie_menu 欄位 pickGroupName & optionsNames 長度 254->191
+10. 資料庫 transaction 表 store_finance_sp 欄位 sp_name 長度 254->191
