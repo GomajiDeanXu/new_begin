@@ -25,8 +25,12 @@ class CreateOutboundRatingTable extends Migration {
 			$table->string('comment')->default('')->comment('評價留言');
 			$table->string('reply', 45)->default('')->comment('店家回覆');
 			$table->integer('review_id')->unsigned()->default(0)->comment('不滿意原因 gomaji.low_rated_reviews.review_id');
-			$table->dateTime('create_ts')->default('0000-00-00 00:00:00')->comment('評價時間');
-			$table->dateTime('reply_ts')->default('0000-00-00 00:00:00')->comment('店家回覆時間');
+			$table->dateTime('create_ts')->nullable();
+			$table->dateTime('create_ts')
+			->default('0000-00-00 00:00:00')->comment('評價時間')->change();
+			$table->dateTime('reply_ts')->nullable();
+			$table->dateTime('reply_ts')
+			->default('0000-00-00 00:00:00')->comment('店家回覆時間')->change();
 			$table->boolean('flag')->default(1)->index('idx_flag')->comment('0: 停用
 1: 正常');
 			$table->string('rating_type', 64)->default('')->comment('特色推薦');

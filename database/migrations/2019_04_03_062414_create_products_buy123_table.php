@@ -45,7 +45,9 @@ class CreateProductsBuy123Table extends Migration {
 			$table->string('desktop_url')->nullable();
 			$table->string('mobile_url')->nullable();
 			$table->string('sku', 50)->nullable();
-			$table->dateTime('last_updated_datetime')->default('0000-00-00 00:00:00');
+			$table->dateTime('last_updated_datetime')->nullable();
+			$table->dateTime('last_updated_datetime')
+			->default('0000-00-00 00:00:00')->change();
 			$table->boolean('is_adult')->nullable()->default(0)->comment('是否為18禁商品');
 			$table->string('adult_img')->nullable()->default('')->comment('18禁圖片(有處理過)');
 		});

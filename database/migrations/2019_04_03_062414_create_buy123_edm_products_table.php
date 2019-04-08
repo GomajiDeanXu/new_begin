@@ -19,8 +19,11 @@ class CreateBuy123EdmProductsTable extends Migration {
 			$table->integer('product_id')->default(0)->index('idx_product_id')->comment('生活市集商品代碼(API.product_id)');
 			$table->string('product_name', 254)->default('')->comment('生活市集商品名稱(API.product_name)');
 			$table->string('product_desc', 254)->default('')->comment('生活市集商品描述(API.product_desc)');
-			$table->dateTime('publish_dt')->default('0000-00-00 00:00:00')->index('idx_publish_dt')->comment('生活市集商品上架時間(API.publish_ts)');
-			$table->dateTime('end_dt')->default('0000-00-00 00:00:00')->index('idx_end_dt')->comment('生活市集商品下架時間(API.end_ts)');
+			$table->dateTime('publish_dt')->nullable();
+			$table->dateTime('publish_dt')->default('0000-00-00 00:00:00')->index('idx_publish_dt')->comment('生活市集商品上架時間(API.publish_ts)')->change();
+			$table->dateTime('end_dt')->nullable();
+			$table->dateTime('end_dt')
+			->default('0000-00-00 00:00:00')->index('idx_end_dt')->comment('生活市集商品下架時間(API.end_ts)')->change();
 			$table->string('org_price', 50)->default('0')->comment('原價(API.org_price)');
 			$table->string('price', 50)->default('0')->comment('特價(API.price)');
 			$table->float('discount', 2, 1)->default(0.0)->comment('折扣(API.discount)');

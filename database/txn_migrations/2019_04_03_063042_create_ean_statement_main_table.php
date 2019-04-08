@@ -25,7 +25,9 @@ class CreateEanStatementMainTable extends Migration {
 			$table->float('ean_payable_amount', 11, 4)->default(0.0000)->comment('ean實際支付金額，依ean_statement_detail對應的正向負向金額加總');
 			$table->string('ean_refund_reason')->default('0')->comment('ean記錄退款原因');
 			$table->dateTime('create_dt')->default('0000-00-00 00:00:00')->comment('建立時間');
-			$table->dateTime('modify_dt')->default('0000-00-00 00:00:00')->comment('修改時間');
+			$table->dateTime('modify_dt')->nullable();
+			$table->dateTime('modify_dt')
+			->default('0000-00-00 00:00:00')->comment('修改時間')->change();
 			$table->string('memo')->default('')->comment('備註');
 		});
 	}

@@ -27,7 +27,9 @@ class CreateOneappWaittingPointsTable extends Migration {
 			$table->float('cash', 11, 4)->default(0.0000)->comment('支付的現金(含團購金)');
 			$table->float('get_points', 11, 4)->default(0.0000)->comment('贈點的點數或百分比');
 			$table->float('get_actual_points', 11, 4)->default(0.0000)->comment('實得點數(已完成換算)');
-			$table->dateTime('expirydate')->default('0000-00-00 00:00:00')->comment('指定點數到期日');
+			$table->dateTime('expirydate')->nullable();
+			$table->dateTime('expirydate')
+			->default('0000-00-00 00:00:00')->comment('指定點數到期日')->change();
 			$table->boolean('expirydays')->default(0)->comment('指定點數到期天數');
 			$table->boolean('get_points_first_flag')->nullable()->default(0)->comment('是否先贈點 (0=兌換券全收核銷後給點，1=交易成單給點，2=單張兌換券核銷後給點)');
 			$table->boolean('combine')->default(0)->comment('0=不可合併,1=可以合併');

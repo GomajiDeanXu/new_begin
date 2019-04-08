@@ -23,7 +23,9 @@ class CreateImgUploadTable extends Migration {
 			$table->string('upload_img2', 128)->nullable()->comment('上傳圖片2');
 			$table->string('upload_img3', 128)->nullable()->comment('上傳圖片3');
 			$table->dateTime('create_dt')->index('idx_create_dt')->comment('建檔時間');
-			$table->dateTime('modify_dt')->nullable()->default('0000-00-00 00:00:00')->comment('異動時間');
+			$table->dateTime('modify_dt')->nullable();
+			$table->dateTime('modify_dt')
+			->default('0000-00-00 00:00:00')->comment('異動時間')->change();
 		});
 	}
 

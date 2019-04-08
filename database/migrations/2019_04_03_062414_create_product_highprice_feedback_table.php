@@ -25,7 +25,9 @@ class CreateProductHighpriceFeedbackTable extends Migration {
 			$table->string('email', 45)->default('')->index('idx_email')->comment('通報人email');
 			$table->string('phone', 15)->default('')->index('idx_phone')->comment('通報人電話');
 			$table->dateTime('create_dt')->index('idx_create_dt')->comment('建檔時間');
-			$table->dateTime('modify_dt')->nullable()->default('0000-00-00 00:00:00')->comment('異動時間');
+			$table->dateTime('modify_dt')->nullable();
+			$table->dateTime('modify_dt')
+			->default('0000-00-00 00:00:00')->comment('異動時間')->change();
 		});
 	}
 

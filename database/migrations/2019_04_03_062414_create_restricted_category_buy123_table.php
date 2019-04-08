@@ -16,7 +16,9 @@ class CreateRestrictedCategoryBuy123Table extends Migration {
 		{
 			$table->integer('categoryid')->unsigned()->primary();
 			$table->string('categoryname')->nullable();
-			$table->dateTime('last_updated_datetime')->default('0000-00-00 00:00:00');
+			$table->dateTime('last_updated_datetime')->nullable();
+			$table->dateTime('last_updated_datetime')
+			->default('0000-00-00 00:00:00')->change();
 		});
 	}
 

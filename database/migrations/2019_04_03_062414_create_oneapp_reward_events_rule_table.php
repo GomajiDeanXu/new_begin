@@ -24,7 +24,9 @@ class CreateOneappRewardEventsRuleTable extends Migration {
 			$table->integer('event_point_highest')->default(0)->comment('點數上限');
 			$table->float('event_point_percent', 5, 4)->default(0.0000)->comment('贈點-指定百分比');
 			$table->integer('event_feedback_points')->default(0)->comment('贈點-指定固定點數');
-			$table->dateTime('event_point_expiry')->default('0000-00-00 00:00:00')->comment('指定點數效期');
+			$table->dateTime('event_point_expiry')->nullable();
+			$table->dateTime('event_point_expiry')
+			->default('0000-00-00 00:00:00')->comment('指定點數效期')->change();
 			$table->boolean('event_point_expiry_days')->comment('指定點數效期天數');
 			$table->integer('trans_amount_limit')->default(0)->comment('交易金額滿多少才贈點');
 			$table->integer('cash_amount_limit')->nullable()->default(0)->comment('現金或刷卡的贈點門檻');
