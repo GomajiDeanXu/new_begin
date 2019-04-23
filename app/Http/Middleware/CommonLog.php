@@ -26,4 +26,16 @@ class CommonLog
 
         return $next($request);
     }
+
+    public function terminate($request, $response) {
+        $info =
+        "Execution Time : " .
+        round((microtime(true) - LARAVEL_START)*1000, 2) . ' s' . PHP_EOL .
+        "Response : " . PHP_EOL .
+        $response . PHP_EOL .
+        "-----------------------------------------------------------" .
+        PHP_EOL;
+
+        Log::info($info);
+    }
 }
