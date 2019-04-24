@@ -1,7 +1,7 @@
 # about this project
 
 ## 系統需求
-* php 7.3
+* php 7.2 up
 * composer
 
 ## Purpose

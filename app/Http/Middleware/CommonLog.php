@@ -16,7 +16,7 @@ class CommonLog
      */
     public function handle($request, Closure $next)
     {
-        $info = "-----------------------------------------------------------" .
+        $info = "-------------------------" .
         PHP_EOL . "#Api_Request" . PHP_EOL .
         "Url : " . $request->path() . PHP_EOL .
         "Inputs : " . PHP_EOL .
@@ -29,8 +29,8 @@ class CommonLog
 
     public function terminate($request, $response) {
         $info =
-        "Execution Time : " .
-        round((microtime(true) - LARAVEL_START)*1000, 2) . ' s' . PHP_EOL .
+        // "Execution Time : " .
+        // round((microtime(true) - LARAVEL_START)*1000, 2) . ' s' . PHP_EOL .
         "Response : " . PHP_EOL .
         $response . PHP_EOL .
         "-----------------------------------------------------------" .
